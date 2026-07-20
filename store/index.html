@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US" class="bg-app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5a1420" />
+    <meta
+      name="description"
+      content="Aurio — premium wireless headphones. Studio sound, all-day battery, and a design built for focus."
+    />
+    <title>Aurio — Studio Sound, Reimagined</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app" role="application" aria-label="Aurio store">
+      <!-- Top navigation -->
+      <header class="topbar">
+        <button class="brand" data-nav="landing" aria-label="Aurio home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Aurio</span>
+        </button>
+        <nav class="steps" aria-label="Checkout progress">
+          <button class="step" data-nav="landing" data-step="landing">Home</button>
+          <button class="step" data-nav="product" data-step="product">Product</button>
+          <button class="step" data-nav="checkout" data-step="checkout">Checkout</button>
+        </nav>
+        <button class="cart-pill" data-nav="product" aria-label="View product">
+          <span class="cart-dot" aria-hidden="true"></span>
+          Bag
+        </button>
+      </header>
+
+      <!-- MAIN VIEWPORT -->
+      <main class="stage">
+        <!-- ===== LANDING ===== -->
+        <section class="view view--landing is-active" id="view-landing" aria-label="Landing">
+          <div class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow">New — Aurio One</span>
+              <h1 class="hero-title text-balance">Studio sound,<br />reimagined for focus.</h1>
+              <p class="hero-sub text-pretty">
+                Adaptive noise cancellation, 40-hour battery, and a maroon-forged
+                finish. Built for people who ship.
+              </p>
+              <div class="hero-actions">
+                <button class="btn btn--primary" data-nav="product">Explore Aurio One</button>
+                <button class="btn btn--ghost" data-nav="checkout">Buy — $249</button>
+              </div>
+              <ul class="hero-stats" aria-label="Key stats">
+                <li><strong>40h</strong><span>Battery</span></li>
+                <li><strong>-42dB</strong><span>ANC</span></li>
+                <li><strong>3yr</strong><span>Warranty</span></li>
+              </ul>
+            </div>
+            <div class="hero-visual">
+              <div class="glowblob" aria-hidden="true"></div>
+              <img src="./assets/product.png" alt="Aurio One wireless headphones in maroon" />
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PRODUCT DETAIL ===== -->
+        <section class="view view--product" id="view-product" aria-label="Product detail" hidden>
+          <div class="product">
+            <div class="product-visual">
+              <div class="glowblob glowblob--sm" aria-hidden="true"></div>
+              <img src="./assets/product.png" alt="Aurio One wireless headphones in maroon" />
+            </div>
+            <div class="product-info">
+              <span class="eyebrow">Aurio One · Maroon</span>
+              <h2 class="product-title text-balance">Aurio One Headphones</h2>
+              <div class="rating" aria-label="Rated 4.9 out of 5">
+                <span class="stars" aria-hidden="true">★★★★★</span>
+                <span class="rating-text">4.9 · 2,140 reviews</span>
+              </div>
+              <p class="product-desc text-pretty">
+                A precision-tuned 42mm driver, ANC that reads the room, and memory-foam
+                comfort that disappears after minutes. This is the last pair you buy.
+              </p>
+              <ul class="features">
+                <li>Adaptive ANC</li>
+                <li>40h Battery</li>
+                <li>USB-C Fast Charge</li>
+                <li>Multipoint Bluetooth 5.4</li>
+              </ul>
+              <div class="swatches" role="group" aria-label="Color">
+                <button class="swatch swatch--maroon is-selected" aria-label="Maroon" aria-pressed="true"></button>
+                <button class="swatch swatch--tangelo" aria-label="Tangelo" aria-pressed="false"></button>
+                <button class="swatch swatch--ink" aria-label="Ink" aria-pressed="false"></button>
+              </div>
+              <div class="buy-row">
+                <div class="price">
+                  <span class="price-now">$249</span>
+                  <span class="price-was">$299</span>
+                </div>
+                <button class="btn btn--primary btn--lg" data-nav="checkout">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== CHECKOUT ===== -->
+        <section class="view view--checkout" id="view-checkout" aria-label="Checkout" hidden>
+          <div class="checkout">
+            <form class="pay" id="pay-form" novalidate>
+              <h2 class="pay-title">Checkout</h2>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="card">Card number</label>
+                <input id="card" name="card" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number" required />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="exp">Expiry</label>
+                  <input id="exp" name="exp" placeholder="MM / YY" autocomplete="cc-exp" required />
+                </div>
+                <div class="field">
+                  <label for="cvc">CVC</label>
+                  <input id="cvc" name="cvc" inputmode="numeric" placeholder="123" autocomplete="cc-csc" required />
+                </div>
+              </div>
+              <div class="field">
+                <label for="name">Name on card</label>
+                <input id="name" name="name" placeholder="Alex Rivera" autocomplete="cc-name" required />
+              </div>
+              <button class="btn btn--primary btn--lg btn--block" type="submit" id="pay-btn">
+                Pay $249
+              </button>
+              <p class="secure-note" aria-live="polite" id="pay-status">
+                <span class="lock" aria-hidden="true"></span> Encrypted &amp; secure — you won&apos;t be charged in this demo.
+              </p>
+            </form>
+
+            <aside class="summary" aria-label="Order summary">
+              <h3 class="summary-title">Order summary</h3>
+              <div class="summary-item">
+                <img src="./assets/product.png" alt="" />
+                <div>
+                  <strong>Aurio One</strong>
+                  <span>Maroon · 1 unit</span>
+                </div>
+                <span class="summary-price">$249</span>
+              </div>
+              <dl class="summary-lines">
+                <div><dt>Subtotal</dt><dd>$249.00</dd></div>
+                <div><dt>Shipping</dt><dd>Free</dd></div>
+                <div><dt>Tax</dt><dd>$0.00</dd></div>
+              </dl>
+              <div class="summary-total">
+                <span>Total</span>
+                <span>$249.00</span>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
