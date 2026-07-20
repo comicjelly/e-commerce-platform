@@ -1,34 +1,853 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
-
 <!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>My Website</title>
-    </head>
-    <body>
-        <h1>My Projects</h1>
-        <h2>Birthday Project</h2>
-        <a href="./public/birthday-invite.html"><img src="./assets/images/birthday-invite.png" alt="birthday-invite" height="200"/></a>
-        <h2>Movie Rankings</h2>
-        <a href="./public/movie-ranking.html"><img src="./assets/images/movie-ranking.png" alt="movie-ranking" height="200"/></a>
-        <a href="./public/about.html">About</a>
-        <a href="./public/contact.html">Contact me</a>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova — Sound, Reimagined</title>
+  <meta name="description" content="Nova wireless headphones. Studio-grade sound, engineered for focus. Buy now." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #121826;
+      --surface-2: #1a2234;
+      --border: #26304a;
+      --fg: #f4f6fb;
+      --muted: #97a3bd;
+      --primary: #4f7cff;
+      --primary-hover: #3b6bff;
+      --primary-fg: #ffffff;
+      --radius: 16px;
+    }
 
-    </body>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3,
+    .brand {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .app {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---------- Top bar ---------- */
+    header {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--fg);
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      color: var(--primary-fg);
+      font-size: 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .nav a:hover {
+      color: var(--fg);
+    }
+
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .steps b {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    /* ---------- Views ---------- */
+    main {
+      flex: 1 1 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .view {
+      position: absolute;
+      inset: 0;
+      display: none;
+      animation: fade 0.35s ease;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s, background 0.15s, border-color 0.15s;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-fg);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--fg);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--surface-2);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* ---------- Landing ---------- */
+    #landing {
+      background:
+        radial-gradient(120% 120% at 80% -10%, rgba(79, 124, 255, 0.22), transparent 55%),
+        var(--bg);
+    }
+
+    .hero {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 40px;
+      padding: 0 32px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(79, 124, 255, 0.12);
+      border: 1px solid rgba(79, 124, 255, 0.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 4.4vw, 62px);
+      line-height: 1.02;
+      font-weight: 700;
+      text-wrap: balance;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 22px 0 30px;
+      max-width: 480px;
+      text-wrap: pretty;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 42px;
+    }
+
+    .hero-stats div span {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .hero-stats div small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 82%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(90% 90% at 50% 20%, rgba(79, 124, 255, 0.25), transparent 60%),
+        var(--surface);
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-visual img {
+      width: 88%;
+      max-height: 90%;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+    }
+
+    /* ---------- Product ---------- */
+    #product {
+      background: var(--bg);
+    }
+
+    .product-wrap {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .product-media {
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(80% 80% at 50% 40%, rgba(79, 124, 255, 0.16), transparent 65%),
+        var(--surface);
+      border-right: 1px solid var(--border);
+    }
+
+    .product-media img {
+      width: 78%;
+      max-height: 74%;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+    }
+
+    .product-info {
+      padding: 0 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffb020;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .rating small {
+      color: var(--muted);
+    }
+
+    .product-info h2 {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .product-info .tagline {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      margin: 22px 0 20px;
+    }
+
+    .price s {
+      font-size: 20px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-left: 10px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+      margin-bottom: 30px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--fg);
+    }
+
+    .feature .dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .buy-row {
+      display: flex;
+      gap: 14px;
+    }
+
+    /* ---------- Checkout ---------- */
+    #checkout {
+      background: var(--bg);
+    }
+
+    .checkout-wrap {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      max-width: 1180px;
+      margin: 0 auto;
+      gap: 40px;
+      padding: 20px 32px;
+      align-items: center;
+    }
+
+    .pay-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 30px;
+    }
+
+    .pay-card h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .pay-card .sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-bottom: 13px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 15px;
+      padding: 13px 14px;
+      border-radius: 11px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .field input::placeholder {
+      color: #5c6684;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.2);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card-badges {
+      display: flex;
+      gap: 6px;
+    }
+
+    .card-badges span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .field-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Summary */
+    .summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 28px;
+    }
+
+    .summary h3 {
+      font-size: 17px;
+      margin-bottom: 18px;
+    }
+
+    .summary-item {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 18px;
+    }
+
+    .summary-item img {
+      width: 62px;
+      height: 62px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+
+    .summary-item .name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .summary-item .qty {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary-item .amt {
+      margin-left: auto;
+      font-weight: 600;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .summary-line.total {
+      color: var(--fg);
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 6px;
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    /* Success overlay */
+    .success {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      place-items: center;
+      z-index: 20;
+    }
+
+    .success.active {
+      display: grid;
+    }
+
+    .success-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 44px;
+      text-align: center;
+      max-width: 400px;
+      animation: fade 0.35s ease;
+    }
+
+    .success-check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(79, 124, 255, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      font-size: 30px;
+    }
+
+    .success-card h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .success-card p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      padding: 0;
+    }
+
+    .back-link:hover {
+      color: var(--fg);
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .product-wrap,
+      .checkout-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual,
+      .product-media {
+        display: none;
+      }
+
+      .nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <button class="brand" onclick="go('landing')" aria-label="Nova home">
+        <span class="brand-mark">◈</span>
+        Nova
+      </button>
+      <nav class="nav" id="topNav">
+        <a href="#" onclick="go('landing');return false;">Home</a>
+        <a href="#" onclick="go('product');return false;">Product</a>
+        <a href="#" onclick="go('product');return false;">Specs</a>
+        <a href="#" onclick="go('product');return false;">Support</a>
+      </nav>
+      <div class="steps" id="checkoutSteps" style="display:none;">
+        <span>Cart</span> › <b>Payment</b> › <span>Done</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- LANDING -->
+      <section class="view active" id="landing">
+        <div class="hero">
+          <div>
+            <span class="eyebrow">◆ New — Nova Gen 3</span>
+            <h1>Sound, <span>reimagined</span> for deep focus.</h1>
+            <p>
+              Studio-grade active noise cancellation, 40-hour battery, and
+              spatial audio engineered for people who build. Hear every detail.
+            </p>
+            <div class="hero-cta">
+              <button class="btn btn-primary" onclick="go('product')">Shop Nova →</button>
+              <button class="btn btn-ghost" onclick="go('product')">View specs</button>
+            </div>
+            <div class="hero-stats">
+              <div><span>40h</span><small>Battery life</small></div>
+              <div><span>-42dB</span><small>Noise canceling</small></div>
+              <div><span>4.9★</span><small>12k reviews</small></div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="./assets/images/product.png" alt="Nova wireless headphones" />
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCT -->
+      <section class="view" id="product">
+        <div class="product-wrap">
+          <div class="product-media">
+            <img src="./assets/images/product.png" alt="Nova wireless headphones" />
+          </div>
+          <div class="product-info">
+            <div class="rating">
+              ★★★★★ <small>4.9 · 12,480 reviews</small>
+            </div>
+            <h2>Nova Gen 3</h2>
+            <p class="tagline">Wireless over-ear headphones with adaptive ANC.</p>
+            <div class="price">$299 <s>$349</s></div>
+            <div class="features">
+              <div class="feature"><span class="dot">✓</span> Adaptive noise canceling</div>
+              <div class="feature"><span class="dot">✓</span> 40-hour battery</div>
+              <div class="feature"><span class="dot">✓</span> Spatial audio</div>
+              <div class="feature"><span class="dot">✓</span> USB-C fast charge</div>
+            </div>
+            <div class="buy-row">
+              <button class="btn btn-primary" onclick="go('checkout')">Buy Now — $299</button>
+              <button class="btn btn-ghost" onclick="go('landing')">← Back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHECKOUT -->
+      <section class="view" id="checkout">
+        <div class="checkout-wrap">
+          <div>
+            <button class="back-link" onclick="go('product')">← Back to product</button>
+            <form class="pay-card" id="payForm" novalidate>
+              <div class="field-head">
+                <h2>Payment</h2>
+                <div class="card-badges">
+                  <span>VISA</span><span>MC</span><span>AMEX</span>
+                </div>
+              </div>
+              <p class="sub">Complete your purchase securely.</p>
+
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@company.com" required />
+              </div>
+              <div class="field">
+                <label for="name">Name on card</label>
+                <input id="name" type="text" placeholder="Alex Rivera" required />
+              </div>
+              <div class="field">
+                <label for="card">Card number</label>
+                <input id="card" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456"
+                  maxlength="19" required />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="exp">Expiry</label>
+                  <input id="exp" type="text" inputmode="numeric" placeholder="MM / YY" maxlength="7"
+                    required />
+                </div>
+                <div class="field">
+                  <label for="cvc">CVC</label>
+                  <input id="cvc" type="text" inputmode="numeric" placeholder="123" maxlength="4"
+                    required />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Pay $312.00</button>
+            </form>
+          </div>
+
+          <aside class="summary">
+            <h3>Order summary</h3>
+            <div class="summary-item">
+              <img src="./assets/images/product.png" alt="Nova Gen 3" />
+              <div>
+                <div class="name">Nova Gen 3</div>
+                <div class="qty">Charcoal · Qty 1</div>
+              </div>
+              <div class="amt">$299.00</div>
+            </div>
+            <div class="summary-line"><span>Subtotal</span><span>$299.00</span></div>
+            <div class="summary-line"><span>Shipping</span><span>Free</span></div>
+            <div class="summary-line"><span>Tax</span><span>$13.00</span></div>
+            <div class="summary-line total"><span>Total</span><span>$312.00</span></div>
+            <div class="secure-note">🔒 Encrypted &amp; secure payment</div>
+          </aside>
+        </div>
+
+        <!-- Success overlay -->
+        <div class="success" id="success">
+          <div class="success-card">
+            <div class="success-check">✓</div>
+            <h2>Order confirmed</h2>
+            <p>Thanks! Your Nova Gen 3 is on its way. A receipt was sent to your email.</p>
+            <button class="btn btn-primary" onclick="reset()">Back to store</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function go(view) {
+      document.querySelectorAll('.view').forEach(function (v) {
+        v.classList.toggle('active', v.id === view);
+      });
+      document.getElementById('topNav').style.display = view === 'checkout' ? 'none' : '';
+      document.getElementById('checkoutSteps').style.display = view === 'checkout' ? '' : 'none';
+    }
+
+    function reset() {
+      document.getElementById('success').classList.remove('active');
+      document.getElementById('payForm').reset();
+      go('landing');
+    }
+
+    // Card number formatting
+    var card = document.getElementById('card');
+    card.addEventListener('input', function () {
+      var digits = this.value.replace(/\D/g, '').slice(0, 16);
+      this.value = digits.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    // Expiry formatting
+    var exp = document.getElementById('exp');
+    exp.addEventListener('input', function () {
+      var digits = this.value.replace(/\D/g, '').slice(0, 4);
+      if (digits.length >= 3) {
+        this.value = digits.slice(0, 2) + ' / ' + digits.slice(2);
+      } else {
+        this.value = digits;
+      }
+    });
+
+    // CVC digits only
+    document.getElementById('cvc').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '');
+    });
+
+    // Submit
+    document.getElementById('payForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!this.checkValidity()) {
+        this.reportValidity();
+        return;
+      }
+      document.getElementById('success').classList.add('active');
+    });
+  </script>
+</body>
+
 </html>
-
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-
-<!-- TODO 4: Add titles/subtitles etc. -->
-
-<!-- TODO 5: Add a link to the project pages -->
-
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-
-<!-- TODO 7: Add the Contact Me and About Me page links -->
